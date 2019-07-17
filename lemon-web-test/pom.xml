@@ -9,12 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lemon-web-authentication</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>lemon-authen-cas</module>
-        <module>lemon-authen-oauth2</module>
-    </modules>
+    <artifactId>lemon-web-test</artifactId>
 
 
 </project>

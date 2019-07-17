@@ -4,10 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
-    <artifactId>lemons</artifactId>
+    <groupId>com.lemonframework.cloud</groupId>
+    <artifactId>lemon-cloud</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>lemon-core</module>
         <module>lemon-common</module>
@@ -30,15 +31,15 @@
         <module>lemon-web-config-center</module>
         <module>lemon-web-register-center</module>
         <module>lemon-job-center</module>
-        <module>lemon-message-push</module>
+        <module>lemon-web-message-push</module>
         <module>lemon-web-ribbon</module>
         <module>lemon-web-feign</module>
         <module>lemon-transaction</module>
-        <module>lemon-starters</module>
+        <module>lemon-web-starters</module>
         <module>lemon-freemarker</module>
         <module>lemon-bootstrap</module>
-        <module>lemon-generator</module>
-        <module>lemon-jenkins</module>
+        <module>lemon-web-generator</module>
+        <module>lemon-web-jenkins</module>
         <module>lemon-web</module>
         <module>lemon-web-core</module>
         <module>lemon-web-common</module>
@@ -59,7 +60,9 @@
         <module>lemon-web-security</module>
         <module>lemon-web-mvc</module>
         <module>lemon-web-statics</module>
+        <module>lemon-test</module>
+        <module>lemon-web-test</module>
+        <module>lemon-ansible</module>
+        <module>lemon-health-check</module>
     </modules>
-
-
 </project>
