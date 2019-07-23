@@ -21,6 +21,7 @@
         <module>lemon-exception</module>
         <module>lemon-util</module>
         <module>lemon-logging</module>
+        <module>lemon-agent</module>
     </modules>
 
     <properties>
