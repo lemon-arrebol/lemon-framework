@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lemon-common</artifactId>
+        <groupId>com.lemonframework.cloud</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lemon-agent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <addClasspath>true</addClasspath>
+        <manifestVersion>1.0</manifestVersion>
+        <preMainClassName>com.lemon.agent.time.BytebuddyMetricAgent</preMainClassName>
+        <agentClass>com.lemon.agent.time.BytebuddyMetricAgent</agentClass>
+        <canRedefineClasses>true</canRedefineClasses>
+        <canRetransformClasses>true</canRetransformClasses>
+        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss,SSS</maven.build.timestamp.format>
+
+        <javassist.version>3.24.1-GA</javassist.version>
+        <bytebuddy.version>1.9.10</bytebuddy.version>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>${javassist.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${bytebuddy.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy-agent -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>${bytebuddy.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <!--使用已存在的MANIFEST.MF文件-->
+                        <!--<manifestFile>${manifestFile}</manifestFile>-->
+
+                        <!--自定义MANIFEST.MF文件内容-->
+                        <manifestEntries>
+                            <!--<addDefaultImplementationEntries/>-->
+
+                            <Manifest-Version>${manifestVersion}</Manifest-Version>
+                            <!--Premain-Class为key，这个<Premain-Class>中的值为value 以vm参数的方式载入，在Java程序的main方法执行之前执行 -->
+                            <Premain-Class>${preMainClassName}</Premain-Class>
+                            <Agent-Class>${agentClass}</Agent-Class>
+                            <addClasspath>${addClasspath}</addClasspath>
+                            <!--重新定义-->
+                            <Can-Redefine-Classes>${canRedefineClasses}</Can-Redefine-Classes>
+                            <!--重新转换-->
+                            <Can-Retransform-Classes>${canRetransformClasses}</Can-Retransform-Classes>
+
+                            <!--修改Class-Path前缀,自定义Class-Path格式-->
+                            <!--<classpathPrefix>lib/</classpathPrefix>-->
+                            <!--<classpathLayoutType>custom</classpathLayoutType>-->
+                            <!--<customClasspathLayout>WEB-INF/lib/$${classpathPrefix}/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout>-->
+                            <!--<customClasspathLayout>$${artifact.artifactId}.$${artifact.extension}</customClasspathLayout>-->
+
+                            <url>${project.url}</url>
+                            <build-time>${maven.build.timestamp}</build-time>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>javassist:javassist:jar:</include>
+                            <include>net.bytebuddy:byte-buddy:jar:</include>
+                            <include>net.bytebuddy:byte-buddy-agent:jar:</include>
+                        </includes>
+                    </artifactSet>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
