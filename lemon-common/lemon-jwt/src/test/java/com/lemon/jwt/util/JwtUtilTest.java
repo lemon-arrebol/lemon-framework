@@ -1,16 +1,21 @@
 package com.lemon.jwt.util;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.lemon.jwt.constants.JwtPayloadConstants;
-import org.apache.commons.codec.binary.Base64;
+import com.lemon.jwt.constants.JwtConstants;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.lang.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.security.SecureRandom;
 import java.util.Map;
+import java.util.UUID;
 
 public class JwtUtilTest {
+    String signingKey = UUID.randomUUID().toString();
+
+    SecureRandom secureRandom = new SecureRandom();
 
     @Before
     public void setUp() throws Exception {
@@ -22,31 +27,38 @@ public class JwtUtilTest {
 
     @Test
     public void parseJWT() {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwOTAxMDQ2MzI3MzQxMDU2Iiwic3QiOiIzIiwibG4iOiJ6aG91bGlkb25nIiwicm4iOiLlkajliKnmoIsiLCJleHAiOjE1MjgzMzgyODR9.JFflYIdE40Yw091XYoWziaLbFeqKKfMkwzRQldpUiVE";
-        System.out.println((token.split("[.]")[1]));
-        System.out.println(Base64.decodeBase64(token.split("[.]")[1]));
-        System.out.println(new String(Base64.decodeBase64(token.split("[.]")[1])));
-        JSONObject jsonObject = JwtUtil.parseJWTPayload(token);
-        System.out.println(jsonObject.getLong("exp"));
-        System.out.println(jsonObject);
+        String token = JwtUtil.createJWTUseHmac(this.generateClaims(), this.signingKey);
+        Claims cliams = JwtUtil.parseJWT(token, this.signingKey);
+
+        Assert.notNull(cliams);
     }
 
     @Test
     public void isExpiration() {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTm1hZSI6ImhvdWp1bnRhbyIsImV4cCI6MzIzMjMzMSwianRpIjoiNjY2NjY2Nzc3Nzc3Nzg4ODg4OCIsImlhdCI6MTU2MzcyMTAzMX0.InVor5wup56zv85vqUMTQe4iX0sN-RHIvM3PS6aqcSU";
-        System.out.println(JwtUtil.isExpiration(token));
+        String token = JwtUtil.createJWTUseHmac(this.generateClaims(), this.signingKey);
+        JwtUtil.isExpiration(token);
     }
 
     @Test
     public void createJWT() {
-        Map<String, Object> claimMap = Maps.newHashMap();
-        claimMap.put("userNmae", "houjuntao");
-        claimMap.put(JwtPayloadConstants.EXPIRATION, 3232331);
-        String signingKey = "6666667777777888888";
-        System.out.println(JwtUtil.createJWT(claimMap, signingKey));
+        String result = JwtUtil.createJWTUseHmac(this.generateClaims(), this.signingKey);
+
+        Assert.hasText(result, "Token is empty");
     }
 
     @Test
     public void isVerify() {
+        String token = JwtUtil.createJWTUseHmac(this.generateClaims(), this.signingKey);
+        boolean result = JwtUtil.isVerify(token, this.signingKey);
+
+        Assert.isTrue(result, "Invalid token");
+    }
+
+    private Map<String, Object> generateClaims() {
+        Map<String, Object> claimMap = Maps.newHashMap();
+        claimMap.put("userId", secureRandom.nextLong());
+        claimMap.put(JwtConstants.EXPIRATION, System.currentTimeMillis() + secureRandom.nextInt());
+
+        return claimMap;
     }
 }

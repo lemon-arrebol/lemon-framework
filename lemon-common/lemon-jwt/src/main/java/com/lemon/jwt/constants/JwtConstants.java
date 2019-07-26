@@ -1,7 +1,7 @@
 package com.lemon.jwt.constants;
 
 /**
- * @author houjuntao
+ * @author lemon
  * @version 1.0
  * @description: JWT Payload 部分也是一个 JSON 对象，用来存放实际需要传递的数据。JWT 规定了7个官方字段，供选用。
  * 注意，JWT 默认是不加密的，任何人都可以读到，所以不要把秘密信息放在这个部分。
@@ -12,9 +12,9 @@ package com.lemon.jwt.constants;
  * nbf (Not Before)：生效时间
  * iat (Issued At)：签发时间
  * jti (JWT ID)：编号
- * @date Create by houjuntao on 2019-07-21 22:51
+ * @date Create by lemon on 2019-07-21 22:51
  */
-public class JwtPayloadConstants {
+public class JwtConstants {
     /**
      * iss (issuer)：签发人
      */
@@ -49,4 +49,21 @@ public class JwtPayloadConstants {
      * jti (JWT ID)：编号
      */
     public static final String ID = "jti";
+
+    /**
+     * 存活时间
+     */
+    public static final String TTL = "ttl";
+
+    public static final String HEADER = "header";
+
+    public static final String HEADER_ALG = "alg";
+
+    public static final String HEADER_TYP = "typ";
+
+    public static final String HEADER_TYP_JWT = "JWT";
+
+    public static final String PAYLOAD = "payload";
+
+    public static final String Signature = "signature";
 }

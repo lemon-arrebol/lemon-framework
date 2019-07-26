@@ -14,12 +14,17 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <properties>
-        <java-jwt.version>3.5.0</java-jwt.version>
-        <jsonwebtoken.version>0.9.0</jsonwebtoken.version>
-    </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>com.lemonframework.cloud</groupId>
+            <artifactId>lemon-util</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lemonframework.cloud</groupId>
+            <artifactId>lemon-uuid-generator</artifactId>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -32,16 +37,6 @@
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>${java-jwt.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.lemonframework.cloud</groupId>
-            <artifactId>lemon-util</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.lemonframework.cloud</groupId>
-            <artifactId>lemon-uuid-generator</artifactId>
         </dependency>
     </dependencies>
 </project>
