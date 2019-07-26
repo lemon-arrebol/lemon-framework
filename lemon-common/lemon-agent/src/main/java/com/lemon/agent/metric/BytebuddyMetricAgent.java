@@ -4,6 +4,13 @@ import java.lang.instrument.Instrumentation;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @param
+ * @author lemon
+ * @description
+ * @return
+ * @date 2019-07-26 18:10
+ */
 public class BytebuddyMetricAgent {
 
     public static void premain(String agentArgs, Instrumentation inst) {

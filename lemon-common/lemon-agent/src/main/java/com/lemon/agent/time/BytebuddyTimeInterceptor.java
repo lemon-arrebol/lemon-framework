@@ -9,10 +9,10 @@ import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
 /**
- * @author houjuntao
+ * @author lemon
  * @version 1.0
  * @description: TODO
- * @date Create by houjuntao on 2019-07-23 15:30
+ * @date Create by lemon on 2019-07-23 15:30
  */
 public class BytebuddyTimeInterceptor {
     /**
@@ -24,7 +24,7 @@ public class BytebuddyTimeInterceptor {
      * @Arguments 方法所有参数
      * @Origin 调用方法
      * @SuperCall 回调父类方法
-     * @author houjuntao
+     * @author lemon
      * @date 2019-07-23 16:01
      */
     @RuntimeType

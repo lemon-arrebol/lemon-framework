@@ -22,9 +22,6 @@
         <canRetransformClasses>true</canRetransformClasses>
         <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss,SSS</maven.build.timestamp.format>
-
-        <javassist.version>3.24.1-GA</javassist.version>
-        <bytebuddy.version>1.9.10</bytebuddy.version>
     </properties>
 
     <dependencies>

@@ -7,6 +7,13 @@ import java.lang.management.MemoryUsage;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @param
+ * @author lemon
+ * @description
+ * @return
+ * @date 2019-07-26 18:10
+ */
 public class Metric {
     private static final long MB = 1048576L;
 
@@ -14,7 +21,7 @@ public class Metric {
      * @param
      * @return
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2019-07-23 16:29
      */
     public static void printMemoryInfo() {
@@ -47,7 +54,7 @@ public class Metric {
      * @param
      * @return
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2019-07-23 16:29
      */
     public static void printGCInfo() {
