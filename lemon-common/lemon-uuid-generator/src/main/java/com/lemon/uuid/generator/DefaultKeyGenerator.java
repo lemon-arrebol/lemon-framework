@@ -1,10 +1,10 @@
 package com.lemon.uuid.generator;
 
 /**
- * @author houjuntao
+ * @author lemon
  * @version 1.0
  * @description: TODO
- * @date Create by houjuntao on 2019-07-20 21:57
+ * @date Create by lemon on 2019-07-20 21:57
  */
 public class DefaultKeyGenerator {
     private static final long START_STMP = 1504195200000L;
