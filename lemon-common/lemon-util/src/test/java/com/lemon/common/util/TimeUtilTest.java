@@ -1,4 +1,4 @@
-package com.lemon.util;
+package com.lemon.common.util;
 
 import org.junit.After;
 import org.junit.Before;
