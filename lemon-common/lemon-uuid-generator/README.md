@@ -1,2 +1,0 @@
-# lemons uuid generator
-全局唯一ID生成器
