@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lemon-springframework</artifactId>
+        <groupId>com.lemonframework.cloud</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lemon-cloud</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>lemon-cloud-gateway</module>
+        <module>lemon-cloud-config-center</module>
+        <module>lemon-cloud-register-center</module>
+        <module>lemon-cloud-message-push</module>
+        <module>lemon-cloud-ribbon</module>
+        <module>lemon-cloud-feign</module>
+        <module>lemon-cloud-starters</module>
+        <module>lemon-cloud-generator</module>
+        <module>lemon-cloud-core</module>
+        <module>lemon-cloud-common</module>
+        <module>lemon-cloud-bootstrap</module>
+        <module>lemon-cloud-authorization</module>
+        <module>lemon-cloud-authentication</module>
+        <module>lemon-cloud-parent</module>
+        <module>lemon-cloud-dependencies</module>
+        <module>lemon-cloud-build</module>
+        <module>lemon-cloud-ci</module>
+        <module>lemon-cloud-docker</module>
+        <module>lemon-cloud-security</module>
+        <module>lemon-cloud-mvc</module>
+        <module>lemon-cloud-test</module>
+        <module>lemon-cloud-health-check</module>
+    </modules>
+</project>

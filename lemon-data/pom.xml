@@ -7,16 +7,24 @@
         <groupId>com.lemonframework.cloud</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lemon-project-management</artifactId>
+    <artifactId>lemon-data</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>lemon-ansible</module>
-        <module>lemon-jenkins</module>
-        <module>lemon-jira</module>
-        <module>lemon-sonar</module>
+        <module>lemon-data-redis</module>
+        <module>lemon-data-mongo</module>
+        <module>lemon-data-mongodb</module>
+        <module>lemon-data-jdbc</module>
+        <module>lemon-data-jpa</module>
+        <module>lemon-data-mybatis</module>
+        <module>lemon-data-hibernate</module>
+        <module>lemon-data-zookeeper</module>
+        <module>lemon-data-kafka</module>
+        <module>lemon-data-rabitmq</module>
+        <module>lemon-data-elasticsearch</module>
     </modules>
 </project>

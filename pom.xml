@@ -5,71 +5,38 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lemonframework.cloud</groupId>
-    <artifactId>lemon-cloud</artifactId>
+    <artifactId>lemon-springframework</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <modules>
-        <module>lemon-core</module>
-        <module>lemon-common</module>
-        <module>lemon-data-redis</module>
-        <module>lemon-data-mongo</module>
-        <module>lemon-data-mongodb</module>
-        <module>lemon-data-jdbc</module>
-        <module>lemon-data-jpa</module>
-        <module>lemon-data-mybatis</module>
-        <module>lemon-data-hibernate</module>
-        <module>lemon-data-zookeeper</module>
-        <module>lemon-data-kafka</module>
-        <module>lemon-data-rabitmq</module>
-        <module>lemon-cache</module>
-        <module>lemon-data-elasticsearch</module>
-        <module>lemon-log</module>
-        <module>lemon-doc-api</module>
-        <module>lemon-web-monitor</module>
-        <module>lemon-web-gateway</module>
-        <module>lemon-web-config-center</module>
-        <module>lemon-web-register-center</module>
-        <module>lemon-job-center</module>
-        <module>lemon-web-message-push</module>
-        <module>lemon-web-ribbon</module>
-        <module>lemon-web-feign</module>
-        <module>lemon-transaction</module>
-        <module>lemon-web-starters</module>
-        <module>lemon-freemarker</module>
-        <module>lemon-bootstrap</module>
-        <module>lemon-web-generator</module>
-        <module>lemon-web-jenkins</module>
-        <module>lemon-web</module>
-        <module>lemon-web-core</module>
-        <module>lemon-web-common</module>
-        <module>lemon-web-freemarker</module>
-        <module>lemon-web-bootstrap</module>
-        <module>lemon-mail</module>
-        <module>lemon-web-authorization</module>
-        <module>lemon-web-authentication</module>
-        <module>lemon-web-parent</module>
-        <module>lemon-parent</module>
-        <module>lemon-dependencies</module>
-        <module>lemon-web-dependencies</module>
-        <module>lemon-build</module>
-        <module>lemon-web-build</module>
-        <module>lemon-web-ci</module>
-        <module>lemon-web-docker</module>
-        <module>lemon-mock</module>
-        <module>lemon-web-security</module>
-        <module>lemon-web-mvc</module>
-        <module>lemon-web-statics</module>
-        <module>lemon-test</module>
-        <module>lemon-web-test</module>
-        <module>lemon-ansible</module>
-        <module>lemon-web-health-check</module>
-        <module>lemon-project-management</module>
-    </modules>
+    <scm>
+        <connection>scm:git:ssh://git@github.com/TERRIFYINGWAVES/lemons.git</connection>
+        <url>https://github.com/TERRIFYINGWAVES/lemons</url>
+        <developerConnection>scm:git:ssh://git@github.com/TERRIFYINGWAVES/lemons.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <lombok.version>1.18.8</lombok.version>
     </properties>
+
+    <modules>
+        <module>lemon-core</module>
+        <module>lemon-common</module>
+        <module>lemon-cache</module>
+        <module>lemon-doc-api</module>
+        <module>lemon-transaction</module>
+        <module>lemon-bootstrap</module>
+        <module>lemon-mail</module>
+        <module>lemon-parent</module>
+        <module>lemon-dependencies</module>
+        <module>lemon-build</module>
+        <module>lemon-mock</module>
+        <module>lemon-test</module>
+        <module>lemon-project-management</module>
+        <module>lemon-cloud</module>
+        <module>lemon-data</module>
+    </modules>
 
     <dependencies>
         <dependency>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lemon-cloud-test</artifactId>
+        <groupId>com.lemonframework.cloud</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lemon-jemeter-test</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jmeter.result.jtl.dir>${project.build.directory}/report/jtl</jmeter.result.jtl.dir>
+        <jmeter.result.html.dir>${project.build.directory}/report/html</jmeter.result.html.dir>
+        <jmeter.result.html.dir1>${project.build.directory}/report/html1</jmeter.result.html.dir1>
+        <compileCopyResourcesOutputDirectory>${project.build.directory}/report/html</compileCopyResourcesOutputDirectory>
+        <jmeterfile>jmeter4Maven.jmx</jmeterfile>
+        <ReportName>TestReport</ReportName>
+
+        <mysql.version>5.1.47</mysql.version>
+        <fastjson.version>1.2.58</fastjson.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <outputDirectory>${project.build.directory}/jmeter/lib</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!-- 核心插件，用来执行jmx脚本，版本号对应的jmeter版本可在此地址查询
+                https://github.com/jmeter-maven-plugin/jmeter-maven-plugin/blob/master/CHANGELOG.md-->
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <!-- 增加jar包,需要先将jar注册到本地maven仓库，打开cmd使用如下命令-->
+                    <!--mvn install:install-file -Dfile=path/jmeter-plugins-json.jar -DgroupId=groupId -DartifactId=jmeter-plugins-json -Dversion=2.6 -Dpackaging=jar -->
+                    <jmeterExtensions>
+                        <!-- jmeter扩展插件 json path assert -->
+                        <!--<artifact>groupId:jmeter-plugins-json:2.6</artifact>-->
+                        <!-- 本地自己写的jar-->
+                        <!--<artifact>groupId:artifactId:version</artifact>-->
+                    </jmeterExtensions>
+                    <!-- 设置jmeter生成结果文件格式 -->
+                    <resultsFileFormat>xml</resultsFileFormat>
+                    <!-- 设置忽略失败是否停止运行 -->
+                    <ignoreResultFailures>true</ignoreResultFailures>
+                    <!-- 设置结果是否有时间戳 -->
+                    <testResultsTimestamp>true</testResultsTimestamp>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <!--<phase>verify</phase>-->
+                        <goals>
+                            <!-- 脚本所在的文件夹 -->
+                            <goal>jmeter</goal>
+                        </goals>
+                        <configuration>
+                            <testFilesIncluded>
+                                <!-- 指定运行的jmeter脚本 -->
+                                <jMeterTestFile>${jmeterfile}</jMeterTestFile>
+                            </testFilesIncluded>
+                            <!-- 指定jtl生成目录 -->
+                            <resultsDirectory>${jmeter.result.jtl.dir}</resultsDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <!--根据xsl模版把jtl文件转换成html-->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>${jmeter.result.jtl.dir}</dir>
+                            <stylesheet>src/test/resources/jmeter-results-detail-report_21.xsl</stylesheet>
+                            <outputDir>${jmeter.result.html.dir}</outputDir>
+                            <!-- 把jtl格式转传承html -->
+                            <fileMappers>
+                                <fileMapper
+                                        implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>html</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+
+                        <transformationSet>
+                            <dir>${jmeter.result.jtl.dir}</dir>
+                            <stylesheet>src/test/resources/jmeter.results.shanhe.me.xsl</stylesheet>
+                            <outputDir>${jmeter.result.html.dir1}</outputDir>
+                            <!-- 把jtl格式转传承html -->
+                            <fileMappers>
+                                <fileMapper
+                                        implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>html</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                    </transformationSets>
+                </configuration>
+                <!-- using XSLT 2.0 -->
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>saxon</artifactId>
+                        <version>8.7</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${compileCopyResourcesOutputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
