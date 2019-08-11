@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>lemon-authen-cas</module>
-        <module>lemon-authen-oauth2</module>
+        <module>lemon-cloud-authen-cas</module>
+        <module>lemon-cloud-authen-oauth2</module>
     </modules>
 </project>

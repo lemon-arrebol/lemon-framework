@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_PATH" value="../logs"/>
+    <property name="applicationName" value="common-study"/>
+
+    <!-- 控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>Lemon | ${applicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <charset>UTF-8</charset>  <!--解决中文乱码问题-->
+        </encoder>
+    </appender>
+
+    <!-- 记录到文件 (每天一个文件) -->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <File>${catalina.base}/log/ads2.log</File>   <!-- 最新的log文件名 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${catalina.base}/log/ads2.log.%d{yyyyMMdd}</FileNamePattern>  <!-- 历史文件名 -->
+            <maxHistory>7</maxHistory> <!-- 保留 30 天的日志 -->
+        </rollingPolicy>
+        <encoder>
+            <Pattern>Lemon | ${applicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <charset>UTF-8</charset>  <!--解决中文乱码问题-->
+        </encoder>
+    </appender>
+
+    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <File>${catalina.base}/log/warn.log</File>   <!-- 最新的log文件名 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${catalina.base}/log/warn.log.%d{yyyyMMdd}</FileNamePattern>  <!-- 历史文件名 -->
+            <maxHistory>7</maxHistory> <!-- 保留 30 天的日志 -->
+        </rollingPolicy>
+        <encoder>
+            <Pattern>Lemon | ${applicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <charset>UTF-8</charset>  <!--解决中文乱码问题-->
+        </encoder>
+    </appender>
+
+    <logger name="com.lemon" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="INFO" />
+        <appender-ref ref="WARN" />
+    </logger>
+
+    <springProfile name="dev">
+        <logger name="com.lemon" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO" />
+            <appender-ref ref="WARN" />
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO" />
+            <appender-ref ref="WARN" />
+        </root>
+    </springProfile>
+
+    <springProfile name="uat">
+        <logger name="com.lemon" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO" />
+            <appender-ref ref="WARN" />
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO" />
+            <appender-ref ref="WARN" />
+        </root>
+    </springProfile>
+
+    <springProfile name="pre">
+        <logger name="com.lemon" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO" />
+            <appender-ref ref="WARN" />
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO" />
+            <appender-ref ref="WARN" />
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="com.lemon" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO" />
+            <appender-ref ref="WARN" />
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO" />
+            <appender-ref ref="WARN" />
+        </root>
+    </springProfile>
+</configuration>

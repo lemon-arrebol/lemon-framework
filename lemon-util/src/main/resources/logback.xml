@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="LOG_PATH" value="../logs"/>
-    <property name="ApplicationName" value="common-util"/>
+    <property name="applicationName" value="common-util"/>
+    <conversionRule conversionWord="serverIp" converterClass="com.lemon.logging.converter.IPAddressConverter"/>
 
     <!-- 控制台 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <Pattern>Lemon | ${applicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
             <charset>UTF-8</charset>  <!--解决中文乱码问题-->
         </encoder>
     </appender>
@@ -22,7 +23,7 @@
             <maxHistory>7</maxHistory> <!-- 保留 30 天的日志 -->
         </rollingPolicy>
         <encoder>
-            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <Pattern>Lemon | ${applicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
             <charset>UTF-8</charset>  <!--解决中文乱码问题-->
         </encoder>
     </appender>
@@ -37,7 +38,7 @@
             <maxHistory>7</maxHistory> <!-- 保留 30 天的日志 -->
         </rollingPolicy>
         <encoder>
-            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <Pattern>Lemon | ${applicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
             <charset>UTF-8</charset>  <!--解决中文乱码问题-->
         </encoder>
     </appender>

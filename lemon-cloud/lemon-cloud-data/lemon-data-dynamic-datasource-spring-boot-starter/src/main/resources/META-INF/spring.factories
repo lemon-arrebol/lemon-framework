@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.lemon.dynamic.dasource.config.DynamicDataSourceAutoConfiguration

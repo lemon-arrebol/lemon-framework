@@ -12,7 +12,7 @@ import java.lang.instrument.Instrumentation;
 /**
  * @author lemon
  * @version 1.0
- * @description: -javaagent:/Users/lemon/IdeaProjects/framework/lemons/lemon-common/lemon-agent/target/lemon-agent-1.0-SNAPSHOT.jar=hellowrold
+ * @description: -javaagent:/Users/lemon/IdeaProjects/framework/lemon-framework/lemon-common/lemon-agent/target/lemon-agent-1.0-SNAPSHOT.jar=hellowrold
  * @date Create by lemon on 2019-07-23 12:34
  */
 public class BytebuddyTimeAgent {

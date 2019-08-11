@@ -17,7 +17,7 @@ public class TimeUtilTest {
     @Test
     public void isBeforeOfToday() {
         System.out.println(TimeUtil.isBeforeOfCurrent("2019-06-22 10:17:33", "yyyy-MM-dd HH:mm:ss"));
-        System.out.println(TimeUtil.isBeforeOfCurrentByMilli( - 6000));
+        System.out.println(TimeUtil.isBeforeOfCurrentByMilli(6000));
         System.out.println(666);
     }
 }

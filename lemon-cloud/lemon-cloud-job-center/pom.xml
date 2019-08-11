@@ -12,8 +12,8 @@
     <artifactId>lemon-job-center</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>lemon-quartz</module>
-        <module>lemon-xxljob</module>
+        <module>lemon-cloud-quartz</module>
+        <module>lemon-cloud-xxljob</module>
     </modules>
 
 

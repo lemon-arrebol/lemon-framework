@@ -7,13 +7,10 @@
         <artifactId>lemon-cloud</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lemon-config-center</artifactId>
+    <artifactId>lemon-cloud-config-center</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <modules>
-        <module>lemon-apollo</module>
-    </modules>
-
-
 </project>

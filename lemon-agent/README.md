@@ -1,4 +1,4 @@
-# lemons agent
+# lemon-framework agent
 通用组件
 
 MANIFEST.MF用于定义扩展和包相关数据的清单文件。 

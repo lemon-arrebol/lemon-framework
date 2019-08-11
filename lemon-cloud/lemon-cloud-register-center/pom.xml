@@ -12,8 +12,8 @@
     <artifactId>lemon-register-center</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>lemon-eureka</module>
-        <module>lemon-consul</module>
+        <module>lemon-cloud-eureka</module>
+        <module>lemon-cloud-consul</module>
     </modules>
 
 

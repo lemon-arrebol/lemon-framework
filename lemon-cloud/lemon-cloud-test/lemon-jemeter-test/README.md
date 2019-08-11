@@ -1,4 +1,4 @@
-# lemons jeneter test
+# lemon-framework jeneter test
 
 [maven+jmeter+jenkins集成] https://www.cnblogs.com/qiaoyeye/p/7608179.html  
 [jmeterandmaven] https://gitlab.com/yinzhenzhi/jmeterandmaven 

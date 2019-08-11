@@ -195,6 +195,7 @@
         <profile>
             <id>dev</id>
             <properties>
+                <activeByDefault>true</activeByDefault>
                 <profileActive>dev</profileActive>
                 <skip.unit.tests>false</skip.unit.tests>
             </properties>
@@ -232,14 +233,11 @@
         <module>lemon-agent</module>
         <module>lemon-security</module>
         <module>lemon-core</module>
-        <module>lemon-cache</module>
-        <module>lemon-transaction</module>
         <module>lemon-mail</module>
         <module>lemon-mock</module>
         <module>lemon-test</module>
         <module>lemon-project-management</module>
         <module>lemon-cloud</module>
-        <module>lemon-data</module>
         <module>lemon-logging</module>
         <module>lemon-uuid-generator</module>
     </modules>
@@ -310,7 +308,7 @@
 
             <dependency>
                 <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-transaction</artifactId>
+                <artifactId>lemon-cloud-transaction</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
