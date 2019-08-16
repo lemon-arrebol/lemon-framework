@@ -1,0 +1,11 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:6002/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    healthcheck:
+      enabled: true
+    instance:
+      lease-expiration-duration-in-seconds: 33
+      lease-renewal-interval-in-seconds: 10
