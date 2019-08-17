@@ -42,7 +42,7 @@ public class CodecUtil {
     /**
      * @param
      * @return
-     * @description UTF-8 编码
+     * @description UTF-8 编码 encodeUtf8 decodeUtf8
      * @author lemon
      * @date 2019-07-26 11:24
      */

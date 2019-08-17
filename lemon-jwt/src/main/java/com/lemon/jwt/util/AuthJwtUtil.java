@@ -39,7 +39,7 @@ public class AuthJwtUtil {
         Preconditions.checkArgument(StringUtils.isNotBlank(algorithm), "Must specify an algorithm");
         Preconditions.checkArgument(StringUtils.isNotBlank(signingKey), "SigningKey not allowed to be empty");
 
-        return AuthJwtUtil.createJWTUseHmac(headerClaimMap, claimMap, algorithm, CodecUtil.encodeUtf8(signingKey));
+        return AuthJwtUtil.createJWTUseHmac(headerClaimMap, claimMap, algorithm, CodecUtil.decodeUtf8(signingKey));
     }
 
     /**
@@ -156,7 +156,7 @@ public class AuthJwtUtil {
         Preconditions.checkArgument(StringUtils.isNotBlank(algorithm), "Must specify an algorithm");
         Preconditions.checkArgument(StringUtils.isNotBlank(signingKey), "SigningKey not allowed to be empty");
 
-        return AuthJwtUtil.parseJWTUseHmac(token, algorithm, CodecUtil.encodeUtf8(signingKey));
+        return AuthJwtUtil.parseJWTUseHmac(token, algorithm, CodecUtil.decodeUtf8(signingKey));
     }
 
     /**
@@ -210,7 +210,7 @@ public class AuthJwtUtil {
         Preconditions.checkArgument(StringUtils.isNotBlank(algorithm), "Must specify an algorithm");
         Preconditions.checkArgument(StringUtils.isNotBlank(signingKey), "SigningKey not allowed to be empty");
 
-        return AuthJwtUtil.getHMACAlgorithm(algorithm, CodecUtil.encodeUtf8(signingKey));
+        return AuthJwtUtil.getHMACAlgorithm(algorithm, CodecUtil.decodeUtf8(signingKey));
     }
 
     /**

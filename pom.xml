@@ -17,11 +17,18 @@
     </scm>
 
     <properties>
+        <final.name>ROOT</final.name>
+
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
         <maven.compiler.encoding>utf-8</maven.compiler.encoding>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+
+        <skipTests>true</skipTests>
+        <maven.test.failure.ignore>true</maven.test.failure.ignore>
+
+        <lemon-framework.version>1.0-SNAPSHOT</lemon-framework.version>
 
         <lombok.version>1.18.8</lombok.version>
 
@@ -161,6 +168,20 @@
     </pluginRepositories>
 
     <build>
+        <finalName>${final.name}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -227,18 +248,17 @@
     </profiles>
 
     <modules>
-        <module>lemon-jwt</module>
-        <module>lemon-exception</module>
-        <module>lemon-util</module>
         <module>lemon-agent</module>
-        <module>lemon-security</module>
         <module>lemon-core</module>
+        <module>lemon-exception</module>
+        <module>lemon-jwt</module>
+        <module>lemon-logging</module>
         <module>lemon-mail</module>
         <module>lemon-mock</module>
-        <module>lemon-test</module>
         <module>lemon-project-management</module>
-        <module>lemon-cloud</module>
-        <module>lemon-logging</module>
+        <module>lemon-security</module>
+        <module>lemon-test</module>
+        <module>lemon-util</module>
         <module>lemon-uuid-generator</module>
     </modules>
 
@@ -249,6 +269,12 @@
             <dependency>
                 <groupId>com.lemonframework.cloud</groupId>
                 <artifactId>lemon-agent</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lemonframework.cloud</groupId>
+                <artifactId>lemon-core</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
@@ -272,48 +298,6 @@
 
             <dependency>
                 <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-security</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-util</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-uuid-generator</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-core</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-common</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-cache</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-cloud-transaction</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
                 <artifactId>lemon-mail</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
@@ -326,7 +310,25 @@
 
             <dependency>
                 <groupId>com.lemonframework.cloud</groupId>
-                <artifactId>lemon-data</artifactId>
+                <artifactId>lemon-security</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lemonframework.cloud</groupId>
+                <artifactId>lemon-test</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lemonframework.cloud</groupId>
+                <artifactId>lemon-util</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lemonframework.cloud</groupId>
+                <artifactId>lemon-uuid-generator</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
