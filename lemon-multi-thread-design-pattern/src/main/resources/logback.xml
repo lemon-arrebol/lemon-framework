@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="LOG_PATH" value="../logs"/>
-    <property name="ApplicationName" value="common-jwt"/>
+    <property name="ApplicationName" value="lemon-multi-thread-design-pattern"/>
 
     <!-- 控制台 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} |
+                %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\)
+                | %msg %n
+            </Pattern>
             <charset>UTF-8</charset>  <!--解决中文乱码问题-->
         </encoder>
     </appender>
@@ -22,7 +25,10 @@
             <maxHistory>7</maxHistory> <!-- 保留 30 天的日志 -->
         </rollingPolicy>
         <encoder>
-            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} |
+                %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\)
+                | %msg %n
+            </Pattern>
             <charset>UTF-8</charset>  <!--解决中文乱码问题-->
         </encoder>
     </appender>
@@ -37,70 +43,73 @@
             <maxHistory>7</maxHistory> <!-- 保留 30 天的日志 -->
         </rollingPolicy>
         <encoder>
-            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} | %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\) | %msg %n</Pattern>
+            <Pattern>Lemon | ${ApplicationName} | %date | %level | %X{request.id} | %X{X-B3-TraceId:-} |
+                %X{req.remoteHost} | %X{req.xForwardedFor} | %serverIp | ${serverPort} | ${PID:-} | %t | %c.%M\(%F:%L\)
+                | %msg %n
+            </Pattern>
             <charset>UTF-8</charset>  <!--解决中文乱码问题-->
         </encoder>
     </appender>
 
     <logger name="com.lemon" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="INFO" />
-        <appender-ref ref="WARN" />
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="WARN"/>
     </logger>
 
     <springProfile name="dev">
         <logger name="com.lemon" level="DEBUG" additivity="false">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO" />
-            <appender-ref ref="WARN" />
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
         </logger>
 
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO" />
-            <appender-ref ref="WARN" />
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
         </root>
     </springProfile>
 
     <springProfile name="uat">
         <logger name="com.lemon" level="DEBUG" additivity="false">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO" />
-            <appender-ref ref="WARN" />
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
         </logger>
 
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO" />
-            <appender-ref ref="WARN" />
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
         </root>
     </springProfile>
 
     <springProfile name="pre">
         <logger name="com.lemon" level="DEBUG" additivity="false">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO" />
-            <appender-ref ref="WARN" />
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
         </logger>
 
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO" />
-            <appender-ref ref="WARN" />
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
         </root>
     </springProfile>
 
     <springProfile name="prod">
         <logger name="com.lemon" level="DEBUG" additivity="false">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO" />
-            <appender-ref ref="WARN" />
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
         </logger>
 
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO" />
-            <appender-ref ref="WARN" />
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
         </root>
     </springProfile>
 </configuration>

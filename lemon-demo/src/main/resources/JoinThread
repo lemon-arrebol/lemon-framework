@@ -1,0 +1,23 @@
+otherObjectLock
+
+"thread1-join" #13 prio=5 os_prio=31 tid=0x00007fd645006000 nid=0xa203 waiting for monitor entry [0x000070000de3e000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+	at com.lemon.demo.thread.JoinThread.lambda$otherObjectLock$0(JoinThread.java:28)
+	- waiting to lock <0x000000076aeef0c0> (a java.lang.Object)
+	at com.lemon.demo.thread.JoinThread$$Lambda$1/1644443712.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:748)
+
+"thread2-join" #14 prio=5 os_prio=31 tid=0x00007fd641812000 nid=0x5903 in Object.wait() [0x000070000dd3b000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x000000076aeef0e0> (a java.lang.Thread)
+	at java.lang.Thread.join(Thread.java:1252)
+	- locked <0x000000076aeef0e0> (a java.lang.Thread)
+	at java.lang.Thread.join(Thread.java:1326)
+	at com.lemon.demo.thread.JoinThread.lambda$otherObjectLock$1(JoinThread.java:46)
+	- locked <0x000000076aeef0c0> (a java.lang.Object)
+	at com.lemon.demo.thread.JoinThread$$Lambda$2/1622006612.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:748)
+
+---------------------------------------------------------------------------------------------------------------------------------------
+

@@ -11,21 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lemonframework.cloud</groupId>
-    <artifactId>lemon-study</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>lemon-multi-thread-design-pattern</artifactId>
     <packaging>jar</packaging>
-
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.auto.service</groupId>
-            <artifactId>auto-service-annotations</artifactId>
-        </dependency>
-    </dependencies>
+    <version>1.0-SNAPSHOT</version>
 </project>

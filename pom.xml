@@ -36,6 +36,7 @@
         <guava.version>27.0-jre</guava.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-collection4.version>4.2</commons-collection4.version>
+        <commons-io.version>2.4</commons-io.version>
 
         <!--json工具-->
         <fastjson.version>1.2.58</fastjson.version>
@@ -257,9 +258,15 @@
         <module>lemon-mock</module>
         <module>lemon-project-management</module>
         <module>lemon-security</module>
+        <module>lemon-study</module>
         <module>lemon-test</module>
         <module>lemon-util</module>
         <module>lemon-uuid-generator</module>
+        <module>lemon-multi-thread-design-pattern</module>
+        <module>lemon-design-pattern</module>
+        <module>lemon-demo</module>
+        <module>lemon-unit-test-generator</module>
+        <module>lemon-qrCode</module>
     </modules>
 
     <!--主pom中把依赖通过<dependecyManagement>引起来，表示子pom可能会用到的jar包依赖。
