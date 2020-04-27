@@ -13,10 +13,12 @@ import java.awt.image.ImageObserver;
  * @date Create by lemon on 2020-04-25 20:30
  */
 @Data
-public class LogoRadius {
+public class ImageRadius {
     private int width = 60;
 
     private int height = 60;
+
+    private String formatName = "png";
 
     /**
      * 角度（根据实测效果，一般建议为图片宽度的1/4）, 0表示直角
@@ -28,15 +30,22 @@ public class LogoRadius {
      */
     private double arch = 10;
 
+    private float alpha = 0.9f;
+
     private int imageType = BufferedImage.TYPE_INT_ARGB;
 
-    RenderingHints.Key hintKey = RenderingHints.KEY_ANTIALIASING;
+    private RenderingHints.Key hintKey = RenderingHints.KEY_ANTIALIASING;
 
-    Object hintValue = RenderingHints.VALUE_ANTIALIAS_ON;
+    private Object hintValue = RenderingHints.VALUE_ANTIALIAS_ON;
 
     private Color color = new Color(255, 164, 14);
 
-    private Composite composite = AlphaComposite.Src;
+    // 圆角 AlphaComposite.SrcAtop
+    private Composite composite;
 
     private ImageObserver observer;
+
+    public ImageRadius() {
+        composite = AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha);
+    }
 }

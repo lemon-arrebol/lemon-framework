@@ -15,11 +15,10 @@ public class QRCodeContainer {
     private String destPath;
     private OutputStream output;
     private String charset = "utf-8";
-    private String formatName = "JPG";
+    private String formatName = "png";
     private QRCode qrCode = new QRCode();
     private Logo logo = new Logo();
     private LogoShape logoShape = new LogoShape();
     private LogoStroke logoStroke = new LogoStroke();
-    private LogoRadius logoRadius = new LogoRadius();
     private WaterMark waterMark = new WaterMark();
 }

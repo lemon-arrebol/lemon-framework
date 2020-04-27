@@ -7,6 +7,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import lombok.Data;
 
 import java.awt.image.BufferedImage;
+import java.io.OutputStream;
 import java.util.Map;
 
 /**
@@ -17,6 +18,21 @@ import java.util.Map;
  */
 @Data
 public class QRCode {
+    /**
+     * 二维码保存字节数组
+     */
+    private byte[] destIamge;
+
+    /**
+     * 二维码保存路径
+     */
+    private String destPath;
+
+    /**
+     * 二维码输出流
+     */
+    private OutputStream destOutput;
+
     /**
      * 二维码内容
      */
@@ -37,6 +53,8 @@ public class QRCode {
     private Map<EncodeHintType, Object> hints = Maps.newHashMap();
 
     private BarcodeFormat barcodeFormat = BarcodeFormat.QR_CODE;
+
+    private ImageRadius imageRadius;
 
     public QRCode() {
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
