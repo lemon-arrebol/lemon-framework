@@ -18,7 +18,7 @@
         </filter>
         <File>${catalina.base}/log/${ApplicationName}.log</File>   <!-- 最新的log文件名 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${catalina.base}/log/ads2.log.%d{yyyyMMdd}</FileNamePattern>  <!-- 历史文件名 -->
+            <FileNamePattern>${catalina.base}/log/${ApplicationName}.log.%d{yyyyMMdd}</FileNamePattern>  <!-- 历史文件名 -->
             <maxHistory>7</maxHistory> <!-- 保留 30 天的日志 -->
         </rollingPolicy>
         <encoder>
