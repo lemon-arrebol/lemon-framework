@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="LOG_PATH" value="../logs"/>
-    <property name="ApplicationName" value="lemon-multi-thread-design-pattern"/>
+    <property name="ApplicationName" value="thread-design-pattern"/>
 
     <!-- 控制台 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
