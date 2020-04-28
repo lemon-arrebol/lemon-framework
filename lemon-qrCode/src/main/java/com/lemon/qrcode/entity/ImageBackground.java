@@ -12,68 +12,57 @@ import java.util.function.Supplier;
 /**
  * @author lemon
  * @version 1.0
- * @description: 二维码LOGO
- * @date Create by lemon on 2020-04-25 20:30
+ * @description: 背景图片
+ * @date Create by lemon on 2020-04-26 09:10
  */
 @Data
-public class Logo {
+public class ImageBackground {
     private int x;
 
     private int y;
 
+    private int imageType = BufferedImage.TYPE_INT_RGB;
+
+    private int hints = Image.SCALE_SMOOTH;
+
     private String formatName = "png";
 
     /**
-     * 图片字节数组
+     * 背景图字节数组
      */
     private byte[] srcIamge;
 
     /**
-     * 图片源路径
+     * 背景图源路径
      */
     private String srcPath;
 
     /**
-     * 图片输入流
+     * 背景图输入流
      */
     private InputStream srcInput;
 
     /**
-     * 图片保存字节数组
+     * 背景图保存字节数组
      */
     private byte[] destIamge;
 
     /**
-     * 图片保存路径
+     * 背景图保存路径
      */
     private String destPath;
 
     /**
-     * 图片输出流
+     * 背景图输出流
      */
     private OutputStream destOutput;
 
-    private int imageType = BufferedImage.TYPE_INT_RGB;
-
-    private boolean compress = true;
-
-    /**
-     * LOGO宽度
-     */
-    private int width = 60;
-
-    /**
-     * LOGO高度
-     */
-    private int height = 60;
-
-    private int hints = Image.SCALE_SMOOTH;
-
     private Supplier<Color> color = () -> Color.YELLOW;
+
     /**
      * 透明度：选择值从0.0~1.0: 完全透明~完全不透明
      */
-    private float alpha = 0.3f;
+    private float alpha = 0.6f;
     // alpha 透明度, 选择值从0.0~1.0: 完全透明~完全不透明
     private Composite composite;
     private ImageObserver observer;
@@ -81,7 +70,7 @@ public class Logo {
     private LogoShape logoShape = new LogoShape();
     private LogoStroke logoStroke = new LogoStroke();
 
-    public Logo() {
+    public ImageBackground() {
         composite = AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha);
     }
 }

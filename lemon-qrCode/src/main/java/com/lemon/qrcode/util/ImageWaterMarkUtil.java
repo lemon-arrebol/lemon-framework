@@ -206,16 +206,16 @@ public class ImageWaterMarkUtil {
 
         // 获取画笔，插入水印
         Graphics2D graphics2D = qrcodeImage.createGraphics();
-        // 设置透明度
-        graphics2D.setComposite(waterMark.getComposite());
         // 设置背景颜色
-        graphics2D.setBackground(waterMark.getBackground());
+        graphics2D.setBackground(waterMark.getBackground().get());
         // 设置“抗锯齿”的属性
         graphics2D.setRenderingHint(waterMark.getHintKey(), waterMark.getHintValue());
         // 设置字体类型和大小
         graphics2D.setFont(waterMark.getFont());
         // 设置字体颜色
-        graphics2D.setColor(waterMark.getColor());
+        graphics2D.setColor(waterMark.getColor().get());
+        // 设置透明度
+        graphics2D.setComposite(waterMark.getComposite());
 
         int x = waterMark.getX();
         int y = waterMark.getY();

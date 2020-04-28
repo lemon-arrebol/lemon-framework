@@ -1,9 +1,7 @@
 package com.lemon.qrcode.util;
 
 import com.google.common.base.Preconditions;
-import com.lemon.qrcode.entity.ImageRadius;
-import com.lemon.qrcode.entity.Logo;
-import com.lemon.qrcode.entity.WaterMark;
+import com.lemon.qrcode.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -96,6 +94,56 @@ public class IOUtil {
     }
 
     /**
+     * @param imageBackground
+     * @param file
+     * @return void
+     * @description
+     * @author lemon
+     * @date 2020-04-27 09:58
+     */
+    public static void checkAndSetFormatName(ImageBackground imageBackground, File file) {
+        IOUtil.checkAndSetFormatName(imageBackground, file.getPath());
+    }
+
+    /**
+     * @param imageBackground
+     * @param file
+     * @return void
+     * @description
+     * @author lemon
+     * @date 2020-04-27 09:56
+     */
+    public static void checkAndSetFormatName(ImageBackground imageBackground, String file) {
+        Preconditions.checkArgument(file.lastIndexOf(".") != -1, String.format("%s 不是一个合法的图片", file));
+        imageBackground.setFormatName(file.substring(file.lastIndexOf(".") + 1));
+    }
+
+    /**
+     * @param mageAlpha
+     * @param file
+     * @return void
+     * @description
+     * @author lemon
+     * @date 2020-04-27 09:58
+     */
+    public static void checkAndSetFormatName(ImageAlpha mageAlpha, File file) {
+        IOUtil.checkAndSetFormatName(mageAlpha, file.getPath());
+    }
+
+    /**
+     * @param mageAlpha
+     * @param file
+     * @return void
+     * @description
+     * @author lemon
+     * @date 2020-04-27 09:56
+     */
+    public static void checkAndSetFormatName(ImageAlpha mageAlpha, String file) {
+        Preconditions.checkArgument(file.lastIndexOf(".") != -1, String.format("%s 不是一个合法的图片", file));
+        mageAlpha.setFormatName(file.substring(file.lastIndexOf(".") + 1));
+    }
+
+    /**
      * @param image 二维码
      * @return byte[]
      * @description
@@ -169,8 +217,8 @@ public class IOUtil {
     public static String writeFile(BufferedImage image, String formatName, String destPath) throws IOException {
         IOUtil.mkdirs(destPath);
         String filePath = String.format("%s%s%s.%s", destPath, File.separator, System.currentTimeMillis(), formatName);
-        log.info("生成文件保存在{}", filePath);
         ImageIO.write(image, formatName, new File(filePath));
+        log.info("生成文件保存在{}", filePath);
         return filePath;
     }
 
@@ -186,8 +234,8 @@ public class IOUtil {
     public static String write(BufferedImage image, String formatName, String destFile) throws IOException {
         File file = new File(destFile);
         IOUtil.mkdirs(file.getParentFile());
-        log.info("生成文件保存在{}", destFile);
         ImageIO.write(image, formatName, file);
+        log.info("生成文件保存在{}", destFile);
         return destFile;
     }
 } 

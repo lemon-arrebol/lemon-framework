@@ -244,8 +244,8 @@ public class ImageLogoUtil {
             return;
         }
 
-        int width = logoImage.getWidth(null);
-        int height = logoImage.getHeight(null);
+        int width = logoImage.getWidth(logo.getObserver());
+        int height = logoImage.getHeight(logo.getObserver());
 
         // 压缩LOGO
         if (logo.isCompress()) {
@@ -278,7 +278,7 @@ public class ImageLogoUtil {
         // 插入LOGO
         Graphics2D graphics2D = qrcodeImage.createGraphics();
         graphics2D.drawImage(logoImage, x, y, width, height, logo.getObserver());
-        graphics2D.setColor(logo.getColor());
+        graphics2D.setColor(logo.getColor().get());
         // 在图形和图像中实现混合和透明效果
         graphics2D.setComposite(logo.getComposite());
         Shape shape = new RoundRectangle2D.Float(x, y, width, width, logo.getLogoShape().getArcw(), logo.getLogoShape().getArch());

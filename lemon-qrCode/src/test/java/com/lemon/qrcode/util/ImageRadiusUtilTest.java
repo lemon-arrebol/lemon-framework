@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class ImageRadiusUtilTest {
     public static void main(String[] args) throws IOException {
-        String srcFilePath = "/Users/lemon/qrCode/weChat.png";
-        String circularImgSavePath = "/Users/lemon/qrCode/radius";
+        String srcFilePath = "/Users/houjuntao/qrCode/weChat.png";
+        String circularImgSavePath = "/Users/houjuntao/qrCode/radius";
 
         ImageRadius imageRadius = new ImageRadius();
         imageRadius.setArch(300);

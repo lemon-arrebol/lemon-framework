@@ -3,6 +3,7 @@ package com.lemon.qrcode.entity;
 import lombok.Data;
 
 import java.awt.*;
+import java.util.function.Supplier;
 
 /**
  * @author lemon
@@ -23,9 +24,9 @@ public class WaterMark {
      */
     private String content;
     private Font font = new Font("微软雅黑", Font.PLAIN, 20);
-    private Color color = new Color(255, 33, 11);
-    private Color background = Color.YELLOW;
-    private float alpha = 0.4f;
+    private Supplier<Color> color = () -> Color.RED;
+    private Supplier<Color> background = () -> Color.YELLOW;
+    private float alpha = 0.5f;
     // alpha 透明度, 选择值从0.0~1.0: 完全透明~完全不透明
     private Composite composite;
     private RenderingHints.Key hintKey = RenderingHints.KEY_ANTIALIASING;

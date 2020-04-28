@@ -1,5 +1,6 @@
 package com.lemon.qrcode.util;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
@@ -34,26 +35,24 @@ public class QRCodeUtil {
      * @author lemon
      * @date 2020-04-25 18:09
      */
-    public static Object encode(QRCodeContainer qrCodeContainer) throws Exception {
-        BufferedImage image = QRCodeUtil.createImage(qrCodeContainer);
+    public static File generateQRCodeAsFle(QRCodeContainer qrCodeContainer) throws Exception {
+        Preconditions.checkArgument(StringUtils.isNotBlank(qrCodeContainer.getDestPath()), "未指定二维码保存路径");
+        String filePath = QRCodeUtil.generateQRCodeAsPath(qrCodeContainer);
+        return new File(filePath);
+    }
 
-        if (StringUtils.isNotBlank(qrCodeContainer.getDestPath())) {
-            String filePath = IOUtil.writeFile(image, qrCodeContainer.getFormatName(), qrCodeContainer.getDestPath());
-            return filePath;
-        }
-
-        if (qrCodeContainer.getOutput() != null) {
-            String formatName = qrCodeContainer.getFormatName();
-
-            if (StringUtils.isBlank(formatName)) {
-                formatName = DEFAULT_FORMAT_NAME;
-            }
-
-            ImageIO.write(image, formatName, qrCodeContainer.getOutput());
-            return null;
-        }
-
-        return IOUtil.toByteArray(image);
+    /**
+     * @param qrCodeContainer
+     * @return java.lang.String
+     * @description 生成二维码(内嵌LOGO)
+     * @author lemon
+     * @date 2020-04-25 18:09
+     */
+    public static String generateQRCodeAsPath(QRCodeContainer qrCodeContainer) throws Exception {
+        Preconditions.checkArgument(StringUtils.isNotBlank(qrCodeContainer.getDestPath()), "未指定二维码保存路径");
+        BufferedImage image = QRCodeUtil.generateQRCode(qrCodeContainer);
+        String filePath = IOUtil.writeFile(image, qrCodeContainer.getFormatName(), qrCodeContainer.getDestPath());
+        return filePath;
     }
 
     /**
@@ -63,10 +62,49 @@ public class QRCodeUtil {
      * @author lemon
      * @date 2020-04-25 18:31
      */
-    public static byte[] encodeToBytes(QRCodeContainer qrCodeContainer) throws Exception {
-        BufferedImage image = QRCodeUtil.createImage(qrCodeContainer);
-
+    public static byte[] generateQRCodeBytes(QRCodeContainer qrCodeContainer) throws Exception {
+        BufferedImage image = QRCodeUtil.generateQRCode(qrCodeContainer);
         return IOUtil.toByteArray(image);
+    }
+
+    /**
+     * @param qrCodeContainer
+     * @return java.awt.image.BufferedImage
+     * @description 创建二维码
+     * @author lemon
+     * @date 2020-04-25 19:59
+     */
+    public static BufferedImage generateQRCode(QRCodeContainer qrCodeContainer) throws Exception {
+        BufferedImage bufferedImage = QRCodeUtil.generateQRCodeNative(qrCodeContainer);
+
+        // 插入图片
+        if (qrCodeContainer.getLogo() != null) {
+            ImageLogoUtil.insertLogoImage(bufferedImage, qrCodeContainer.getLogo());
+        }
+
+        // 插入水印
+        if (qrCodeContainer.getWaterMark() != null && StringUtils.isNotBlank(qrCodeContainer.getWaterMark().getContent())) {
+            ImageWaterMarkUtil.insertWaterMark(bufferedImage, qrCodeContainer.getWaterMark());
+        }
+
+        return bufferedImage;
+    }
+
+    /**
+     * @param qrCodeContainer
+     * @return java.awt.image.BufferedImage
+     * @description 创建二维码
+     * @author lemon
+     * @date 2020-04-25 19:56
+     */
+    public static BufferedImage generateQRCodeNative(QRCodeContainer qrCodeContainer) throws Exception {
+        QRCode qrCode = qrCodeContainer.getQrCode();
+        // 生成二维码
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(qrCode.getContent(), qrCode.getBarcodeFormat(),
+                qrCode.getWidth(), qrCode.getHeight(), qrCode.getHints());
+        BufferedImage bufferedImage = qrCode.getImageRenderStrategy().render(bitMatrix, qrCode);
+
+        return bufferedImage;
     }
 
     /**
@@ -81,6 +119,18 @@ public class QRCodeUtil {
     }
 
     /**
+     * @param file 二维码图片
+     * @return java.lang.String
+     * @description 解析二维码
+     * @author lemon
+     * @date 2020-04-25 18:03
+     */
+    public static String decode(File file) throws Exception {
+        BufferedImage image = ImageIO.read(file);
+        return QRCodeUtil.decode(image);
+    }
+
+    /**
      * @param qrcodes 二维码图片
      * @return java.lang.String
      * @description 解析二维码
@@ -90,18 +140,6 @@ public class QRCodeUtil {
     public static String decode(byte[] qrcodes) throws Exception {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(qrcodes);
         BufferedImage image = ImageIO.read(byteArrayInputStream);
-        return QRCodeUtil.decode(image);
-    }
-
-    /**
-     * @param file 二维码图片
-     * @return java.lang.String
-     * @description 解析二维码
-     * @author lemon
-     * @date 2020-04-25 18:03
-     */
-    public static String decode(File file) throws Exception {
-        BufferedImage image = ImageIO.read(file);
         return QRCodeUtil.decode(image);
     }
 
@@ -135,62 +173,10 @@ public class QRCodeUtil {
 
         BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(image);
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-        Result result;
         Map<DecodeHintType, Object> hints = Maps.newHashMap();
         hints.put(DecodeHintType.CHARACTER_SET, charset);
-        result = new MultiFormatReader().decode(bitmap, hints);
+        Result result = new MultiFormatReader().decode(bitmap, hints);
         String resultValue = result.getText();
         return resultValue;
-    }
-
-    /**
-     * @param qrCodeContainer
-     * @return java.awt.image.BufferedImage
-     * @description 创建二维码
-     * @author lemon
-     * @date 2020-04-25 19:59
-     */
-    private static BufferedImage createImage(QRCodeContainer qrCodeContainer) throws Exception {
-        BufferedImage bufferedImage = QRCodeUtil.createQRCodeImage(qrCodeContainer);
-
-        // 插入图片
-        if (qrCodeContainer.getLogo() != null) {
-            ImageLogoUtil.insertLogoImage(bufferedImage, qrCodeContainer.getLogo());
-        }
-
-        // 插入水印
-        if (qrCodeContainer.getWaterMark() != null && StringUtils.isNotBlank(qrCodeContainer.getWaterMark().getContent())) {
-            ImageWaterMarkUtil.insertWaterMark(bufferedImage, qrCodeContainer.getWaterMark());
-        }
-
-        return bufferedImage;
-    }
-
-    /**
-     * @param qrCodeContainer
-     * @return java.awt.image.BufferedImage
-     * @description 创建二维码
-     * @author lemon
-     * @date 2020-04-25 19:56
-     */
-    private static BufferedImage createQRCodeImage(QRCodeContainer qrCodeContainer) throws Exception {
-        QRCode qrCode = qrCodeContainer.getQrCode();
-        // 生成二维码
-        BitMatrix bitMatrix = new MultiFormatWriter().encode(qrCode.getContent(), qrCode.getBarcodeFormat(),
-                qrCode.getWidth(), qrCode.getHeight(), qrCode.getHints());
-        // 获取二维码宽高
-        int width = bitMatrix.getWidth();
-        int height = bitMatrix.getHeight();
-        // 将二维码放入缓冲流
-        BufferedImage bufferedImage = new BufferedImage(width, height, qrCode.getImageType());
-
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                // 循环将二维码内容定入图片
-                bufferedImage.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
-            }
-        }
-
-        return bufferedImage;
     }
 } 

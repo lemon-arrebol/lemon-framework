@@ -1,13 +1,26 @@
 package com.lemon.qrcode.util;
 
 import com.lemon.qrcode.entity.*;
-import com.lemon.qrcode.strategy.GoogleImageRenderStrategy;
+import com.lemon.qrcode.strategy.ImageDynamicRenderStrategy;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.security.SecureRandom;
 
-public class QRCodeUtilTest {
+public class ImageBackgroundUtilTest {
     public static void main(String[] args) throws Exception {
+        String backgroudImagePath = "/Users/houjuntao/qrCode/weChat.png";
+        String imagePath = "/Users/houjuntao/qrCode/weChat.png";
+        String destPath = "/Users/houjuntao/qrCode/backgroudImage";
+
+        ImageBackground imageBackground = new ImageBackground();
+        imageBackground.setSrcPath(backgroudImagePath);
+        imageBackground.setDestPath(destPath);
+
+        ImageBackgroundUtil.insertImageBackgroundAsFile(imageBackground, getQRCode());
+    }
+
+    public static BufferedImage getQRCode() throws Exception {
         String text = "https://www.yuque.com/ningmeng-rylxs/wzy51x/fw678g";
         String logoPath = "/Users/houjuntao/qrCode/weChat.png";
         String destPath = "/Users/houjuntao/qrCode/erWeiMa";
@@ -27,7 +40,7 @@ public class QRCodeUtilTest {
             System.out.println(String.format("red %s, green %s, blue %s, alpha %s", red, green, blue, alpha));
             return new Color(red, green, blue, alpha);
         });
-        qrCode.setImageRenderStrategy(new GoogleImageRenderStrategy());
+        qrCode.setImageRenderStrategy(new ImageDynamicRenderStrategy());
 
         Logo logo = new Logo();
         logo.setSrcPath(logoPath);
@@ -43,6 +56,6 @@ public class QRCodeUtilTest {
         qrCodeContainer.setDestPath(destPath);
         qrCodeContainer.setWaterMark(waterMark);
 
-        System.out.println(QRCodeUtil.generateQRCodeAsPath(qrCodeContainer));
+        return QRCodeUtil.generateQRCode(qrCodeContainer);
     }
 }
