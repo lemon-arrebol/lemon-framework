@@ -1,12 +1,13 @@
-package com.lemon.qrcode.util;
+package com.lemon.qrcode.decorator;
 
 import com.lemon.qrcode.config.*;
 import com.lemon.qrcode.strategy.DefaultImageRenderStrategy;
+import com.lemon.qrcode.util.IOUtil;
 
 import java.awt.*;
 import java.security.SecureRandom;
 
-public class QRCodeUtilTest {
+public class DefaultQRCodeGeneratorTest {
     public static void main(String[] args) throws Exception {
         String text = "https://www.yuque.com/ningmeng-rylxs/wzy51x/fw678g";
         String logoPath = "/Users/lemon/qrCode/weChat.png";
@@ -24,7 +25,6 @@ public class QRCodeUtilTest {
             int green = random.nextInt(255);
             int blue = random.nextInt(255);
             int alpha = random.nextInt(255);
-            System.out.println(String.format("red %s, green %s, blue %s, alpha %s", red, green, blue, alpha));
             return new Color(red, green, blue, alpha);
         });
         qrCode.setImageRenderStrategy(new DefaultImageRenderStrategy());
@@ -42,7 +42,9 @@ public class QRCodeUtilTest {
         qrCodeConfig.setLogo(logo);
         qrCodeConfig.setDestPath(destPath);
         qrCodeConfig.setWaterMark(waterMark);
+        DefaultQRCodeGenerator defaultQRCodeGenerator = new DefaultQRCodeGenerator();
+        defaultQRCodeGenerator.generator(qrCodeConfig);
 
-        System.out.println(QRCodeUtil.generateQRCodeAsPath(qrCodeConfig));
+        IOUtil.writeFile(qrCodeConfig.getQrBufferedImage(), qrCodeConfig.getFormatName(), qrCodeConfig.getDestPath());
     }
 }

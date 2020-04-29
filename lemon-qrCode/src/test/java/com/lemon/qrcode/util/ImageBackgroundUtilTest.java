@@ -1,7 +1,7 @@
 package com.lemon.qrcode.util;
 
-import com.lemon.qrcode.entity.*;
-import com.lemon.qrcode.strategy.ImageDynamicRenderStrategy;
+import com.lemon.qrcode.config.*;
+import com.lemon.qrcode.strategy.DefaultImageRenderStrategy;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,9 +9,9 @@ import java.security.SecureRandom;
 
 public class ImageBackgroundUtilTest {
     public static void main(String[] args) throws Exception {
-        String backgroudImagePath = "/Users/houjuntao/qrCode/weChat.png";
-        String imagePath = "/Users/houjuntao/qrCode/weChat.png";
-        String destPath = "/Users/houjuntao/qrCode/backgroudImage";
+        String backgroudImagePath = "/Users/lemon/qrCode/weChat.png";
+        String imagePath = "/Users/lemon/qrCode/weChat.png";
+        String destPath = "/Users/lemon/qrCode/backgroudImage";
 
         ImageBackground imageBackground = new ImageBackground();
         imageBackground.setSrcPath(backgroudImagePath);
@@ -22,8 +22,8 @@ public class ImageBackgroundUtilTest {
 
     public static BufferedImage getQRCode() throws Exception {
         String text = "https://www.yuque.com/ningmeng-rylxs/wzy51x/fw678g";
-        String logoPath = "/Users/houjuntao/qrCode/weChat.png";
-        String destPath = "/Users/houjuntao/qrCode/erWeiMa";
+        String logoPath = "/Users/lemon/qrCode/weChat.png";
+        String destPath = "/Users/lemon/qrCode/erWeiMa";
 
         ImageRadius imageRadius = new ImageRadius();
         imageRadius.setArch(300);
@@ -40,7 +40,7 @@ public class ImageBackgroundUtilTest {
             System.out.println(String.format("red %s, green %s, blue %s, alpha %s", red, green, blue, alpha));
             return new Color(red, green, blue, alpha);
         });
-        qrCode.setImageRenderStrategy(new ImageDynamicRenderStrategy());
+        qrCode.setImageRenderStrategy(new DefaultImageRenderStrategy());
 
         Logo logo = new Logo();
         logo.setSrcPath(logoPath);
@@ -50,12 +50,12 @@ public class ImageBackgroundUtilTest {
         WaterMark waterMark = new WaterMark();
         waterMark.setContent("Love");
 
-        QRCodeContainer qrCodeContainer = new QRCodeContainer();
-        qrCodeContainer.setQrCode(qrCode);
-        qrCodeContainer.setLogo(logo);
-        qrCodeContainer.setDestPath(destPath);
-        qrCodeContainer.setWaterMark(waterMark);
+        QRCodeConfig qrCodeConfig = new QRCodeConfig();
+        qrCodeConfig.setQrCode(qrCode);
+        qrCodeConfig.setLogo(logo);
+        qrCodeConfig.setDestPath(destPath);
+        qrCodeConfig.setWaterMark(waterMark);
 
-        return QRCodeUtil.generateQRCode(qrCodeContainer);
+        return QRCodeUtil.generateQRCode(qrCodeConfig);
     }
 }

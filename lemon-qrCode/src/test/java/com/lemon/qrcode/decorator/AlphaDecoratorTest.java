@@ -1,16 +1,18 @@
-package com.lemon.qrcode.util;
+package com.lemon.qrcode.decorator;
 
 import com.lemon.qrcode.config.*;
 import com.lemon.qrcode.strategy.DefaultImageRenderStrategy;
+import com.lemon.qrcode.util.IOUtil;
 
 import java.awt.*;
 import java.security.SecureRandom;
 
-public class QRCodeUtilTest {
+public class AlphaDecoratorTest {
     public static void main(String[] args) throws Exception {
         String text = "https://www.yuque.com/ningmeng-rylxs/wzy51x/fw678g";
+        String backgroudImagePath = "/Users/lemon/qrCode/weChat.png";
         String logoPath = "/Users/lemon/qrCode/weChat.png";
-        String destPath = "/Users/lemon/qrCode/erWeiMa";
+        String destPath = "/Users/lemon/qrCode/alpha";
 
         ImageRadius imageRadius = new ImageRadius();
         imageRadius.setArch(300);
@@ -24,9 +26,9 @@ public class QRCodeUtilTest {
             int green = random.nextInt(255);
             int blue = random.nextInt(255);
             int alpha = random.nextInt(255);
-            System.out.println(String.format("red %s, green %s, blue %s, alpha %s", red, green, blue, alpha));
             return new Color(red, green, blue, alpha);
         });
+
         qrCode.setImageRenderStrategy(new DefaultImageRenderStrategy());
 
         Logo logo = new Logo();
@@ -37,12 +39,28 @@ public class QRCodeUtilTest {
         WaterMark waterMark = new WaterMark();
         waterMark.setContent("Love");
 
+        ImageAlpha imageAlpha = new ImageAlpha();
+        imageAlpha.setDestPath(destPath);
+        imageAlpha.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 0.6f));
+
+        ImageBackground imageBackground = new ImageBackground();
+        imageBackground.setSrcPath(logoPath);
+        imageBackground.setDestPath(destPath);
+
         QRCodeConfig qrCodeConfig = new QRCodeConfig();
         qrCodeConfig.setQrCode(qrCode);
         qrCodeConfig.setLogo(logo);
         qrCodeConfig.setDestPath(destPath);
         qrCodeConfig.setWaterMark(waterMark);
+        qrCodeConfig.setImageBackground(imageBackground);
 
-        System.out.println(QRCodeUtil.generateQRCodeAsPath(qrCodeConfig));
+        QRCodeGenerator defaultQRCodeGenerator = new DefaultQRCodeGenerator();
+        QRCodeGenerator waterMarkDecorator = new WaterMarkDecorator(defaultQRCodeGenerator);
+        LogoDecorator logoDecorator = new LogoDecorator(waterMarkDecorator);
+        BackgroundDecorator backgroundDecorator = new BackgroundDecorator(logoDecorator);
+        AlphaDecorator alphaDecorator = new AlphaDecorator(backgroundDecorator);
+        alphaDecorator.generator(qrCodeConfig);
+
+        IOUtil.writeFile(qrCodeConfig.getQrBufferedImage(), qrCodeConfig.getFormatName(), qrCodeConfig.getDestPath());
     }
 }

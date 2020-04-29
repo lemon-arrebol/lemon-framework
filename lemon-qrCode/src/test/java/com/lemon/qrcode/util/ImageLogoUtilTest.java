@@ -1,12 +1,12 @@
 package com.lemon.qrcode.util;
 
-import com.lemon.qrcode.entity.ImageRadius;
-import com.lemon.qrcode.entity.Logo;
+import com.lemon.qrcode.config.ImageRadius;
+import com.lemon.qrcode.config.Logo;
 
 public class ImageLogoUtilTest {
     public static void main(String[] args) throws Exception {
-        String logoPath = "/Users/houjuntao/qrCode/weChat.png";
-        String circularImgSavePath = "/Users/houjuntao/qrCode/logo";
+        String logoPath = "/Users/lemon/qrCode/weChat.png";
+        String circularImgSavePath = "/Users/lemon/qrCode/logo";
 
         ImageRadius imageRadius = new ImageRadius();
         imageRadius.setArch(300);

@@ -1,13 +1,13 @@
 package com.lemon.qrcode.util;
 
-import com.lemon.qrcode.entity.ImageAlpha;
+import com.lemon.qrcode.config.ImageAlpha;
 
 import java.awt.*;
 
 public class ImageAlphaUtilTest {
     public static void main(String[] args) throws Exception {
-        String backgroudImagePath = "/Users/houjuntao/qrCode/backgroudImage.jpeg";
-        String destPath = "/Users/houjuntao/qrCode/alpha";
+        String backgroudImagePath = "/Users/lemon/qrCode/backgroudImage.jpeg";
+        String destPath = "/Users/lemon/qrCode/alpha";
 
         ImageAlpha imageAlpha = new ImageAlpha();
         imageAlpha.setSrcPath(backgroudImagePath);
