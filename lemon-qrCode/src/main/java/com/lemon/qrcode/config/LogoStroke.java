@@ -1,4 +1,4 @@
-package com.lemon.qrcode.entity;
+package com.lemon.qrcode.config;
 
 import lombok.Data;
 

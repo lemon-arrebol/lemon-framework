@@ -1,6 +1,6 @@
 package com.lemon.qrcode.util;
 
-import com.lemon.qrcode.entity.Logo;
+import com.lemon.qrcode.config.Logo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -226,7 +226,11 @@ public class ImageLogoUtil {
             logoImage = ImageIO.read(byteArrayInputStream);
         }
 
-        logoImage = ImageRadiusUtil.cornerRadius((BufferedImage) logoImage, logo.getImageRadius());
+        // 图片圆角
+        if (logo.getImageRadius() != null) {
+            logoImage = ImageRadiusUtil.cornerRadius((BufferedImage) logoImage, logo.getImageRadius());
+        }
+
         ImageLogoUtil.insertLogoImage(qrcodeImage, logoImage, logo);
     }
 
@@ -239,7 +243,7 @@ public class ImageLogoUtil {
      * @author lemon
      * @date 2020-04-25 18:39
      */
-    private static void insertLogoImage(BufferedImage qrcodeImage, Image logoImage, Logo logo) {
+    public static void insertLogoImage(BufferedImage qrcodeImage, Image logoImage, Logo logo) {
         if (logoImage == null) {
             return;
         }

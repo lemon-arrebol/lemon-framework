@@ -1,7 +1,7 @@
 package com.lemon.qrcode.util;
 
 import com.google.common.base.Preconditions;
-import com.lemon.qrcode.entity.ImageAlpha;
+import com.lemon.qrcode.config.ImageAlpha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,7 +22,7 @@ public class ImageAlphaUtil {
      * @param imageAlpha
      * @return byte[]
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:15
      */
     public static byte[] insertImageAlphaAsBytes(ImageAlpha imageAlpha) throws Exception {
@@ -33,7 +33,7 @@ public class ImageAlphaUtil {
      * @param imageAlpha
      * @return java.io.File
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:25
      */
     public static File insertImageAlphaAsFile(ImageAlpha imageAlpha) throws Exception {
@@ -46,7 +46,7 @@ public class ImageAlphaUtil {
      * @param imageAlpha
      * @return java.lang.String
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:25
      */
     public static String insertImageAlphaAsPath(ImageAlpha imageAlpha) throws Exception {
@@ -90,7 +90,22 @@ public class ImageAlphaUtil {
             bgBufferedImage = ImageIO.read(byteArrayInputStream);
         }
 
-        //
+        bgBufferedImage = ImageAlphaUtil.insertImageAlpha(bgBufferedImage, imageAlpha);
+
+        return bgBufferedImage;
+    }
+
+    /**
+     * @param bgBufferedImage
+     * @param imageAlpha
+     * @return java.awt.image.BufferedImage
+     * @description
+     * @author lemon
+     * @date 2020-04-29 16:27
+     */
+    public static BufferedImage insertImageAlpha(BufferedImage bgBufferedImage, ImageAlpha imageAlpha) throws Exception {
+        Preconditions.checkArgument(bgBufferedImage != null, "没有指定背景图片信息");
+
         BufferedImage newBgBufferedImage = new BufferedImage(bgBufferedImage.getWidth(), bgBufferedImage.getHeight(), imageAlpha.getImageType());
         // 获取画笔
         Graphics2D graphics2D = newBgBufferedImage.createGraphics();

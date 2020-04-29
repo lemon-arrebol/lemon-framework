@@ -1,8 +1,8 @@
 package com.lemon.qrcode.util;
 
 import com.google.common.base.Preconditions;
-import com.lemon.qrcode.entity.ImageAlpha;
-import com.lemon.qrcode.entity.ImageBackground;
+import com.lemon.qrcode.config.ImageAlpha;
+import com.lemon.qrcode.config.ImageBackground;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,7 +24,7 @@ public class ImageBackgroundUtil {
      * @param imagePath
      * @return byte[]
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:15
      */
     public static byte[] insertImageBackgroundAsBytes(ImageBackground imageBackground, String imagePath) throws Exception {
@@ -37,7 +37,7 @@ public class ImageBackgroundUtil {
      * @param imageFile
      * @return byte[]
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:24
      */
     public static byte[] insertImageBackgroundAsBytes(ImageBackground imageBackground, File imageFile) throws Exception {
@@ -51,7 +51,7 @@ public class ImageBackgroundUtil {
      * @param imageBytes
      * @return byte[]
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:24
      */
     public static byte[] insertImageBackgroundAsBytes(ImageBackground imageBackground, byte[] imageBytes) throws Exception {
@@ -64,7 +64,7 @@ public class ImageBackgroundUtil {
      * @param bufferedImage
      * @return byte[]
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:48
      */
     public static byte[] insertImageBackgroundAsBytes(ImageBackground imageBackground, BufferedImage bufferedImage) throws Exception {
@@ -77,7 +77,7 @@ public class ImageBackgroundUtil {
      * @param imagePath
      * @return java.io.File
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:25
      */
     public static File insertImageBackgroundAsFile(ImageBackground imageBackground, String imagePath) throws Exception {
@@ -91,7 +91,7 @@ public class ImageBackgroundUtil {
      * @param imageFile
      * @return java.io.File
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:24
      */
     public static File insertImageBackgroundAsFile(ImageBackground imageBackground, File imageFile) throws Exception {
@@ -105,7 +105,7 @@ public class ImageBackgroundUtil {
      * @param imageBytes
      * @return java.io.File
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:25
      */
     public static File insertImageBackgroundAsFile(ImageBackground imageBackground, byte[] imageBytes) throws Exception {
@@ -118,7 +118,7 @@ public class ImageBackgroundUtil {
      * @param bufferedImage
      * @return java.io.File
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:49
      */
     public static File insertImageBackgroundAsFile(ImageBackground imageBackground, BufferedImage bufferedImage) throws Exception {
@@ -131,7 +131,7 @@ public class ImageBackgroundUtil {
      * @param imagePath
      * @return java.lang.String
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:25
      */
     public static String insertImageBackgroundAsPath(ImageBackground imageBackground, String imagePath) throws Exception {
@@ -144,7 +144,7 @@ public class ImageBackgroundUtil {
      * @param imageFile
      * @return java.lang.String
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:25
      */
     public static String insertImageBackgroundAsPath(ImageBackground imageBackground, File imageFile) throws Exception {
@@ -159,7 +159,7 @@ public class ImageBackgroundUtil {
      * @param imageBytes
      * @return java.lang.String
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:25
      */
     public static String insertImageBackgroundAsPath(ImageBackground imageBackground, byte[] imageBytes) throws Exception {
@@ -173,7 +173,7 @@ public class ImageBackgroundUtil {
      * @param bufferedImage
      * @return java.lang.String
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:49
      */
     public static String insertImageBackgroundAsPath(ImageBackground imageBackground, BufferedImage bufferedImage) throws Exception {
@@ -187,7 +187,7 @@ public class ImageBackgroundUtil {
      * @param imagePath
      * @return java.awt.image.BufferedImage
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:26
      */
     public static BufferedImage insertImageBackground(ImageBackground imageBackground, String imagePath) throws Exception {
@@ -199,7 +199,7 @@ public class ImageBackgroundUtil {
      * @param imageBackground * @param imageFile
      * @return java.awt.image.BufferedImage
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:26
      */
     public static BufferedImage insertImageBackground(ImageBackground imageBackground, File imageFile) throws Exception {
@@ -214,7 +214,7 @@ public class ImageBackgroundUtil {
      * @param imageBytes
      * @return java.awt.image.BufferedImage
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:26
      */
     public static BufferedImage insertImageBackground(ImageBackground imageBackground, byte[] imageBytes) throws Exception {
@@ -271,7 +271,7 @@ public class ImageBackgroundUtil {
      * @param image
      * @return void
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-28 19:55
      */
     private static void insertImageBackground(BufferedImage bgBufferedImage, ImageBackground imageBackground, BufferedImage image) {

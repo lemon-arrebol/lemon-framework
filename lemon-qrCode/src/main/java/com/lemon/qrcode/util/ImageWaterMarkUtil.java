@@ -1,6 +1,6 @@
 package com.lemon.qrcode.util;
 
-import com.lemon.qrcode.entity.WaterMark;
+import com.lemon.qrcode.config.WaterMark;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

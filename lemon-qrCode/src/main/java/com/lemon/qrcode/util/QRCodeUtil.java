@@ -6,8 +6,8 @@ import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
-import com.lemon.qrcode.entity.QRCode;
-import com.lemon.qrcode.entity.QRCodeContainer;
+import com.lemon.qrcode.config.QRCode;
+import com.lemon.qrcode.config.QRCodeConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,84 +26,83 @@ import java.util.Map;
 public class QRCodeUtil {
     private static final String DEFAULT_CHARSET = "utf-8";
 
-    private static final String DEFAULT_FORMAT_NAME = "JPG";
-
     /**
-     * @param qrCodeContainer
+     * @param qrCodeConfig
      * @return java.lang.String
      * @description 生成二维码(内嵌LOGO)
      * @author lemon
      * @date 2020-04-25 18:09
      */
-    public static File generateQRCodeAsFle(QRCodeContainer qrCodeContainer) throws Exception {
-        Preconditions.checkArgument(StringUtils.isNotBlank(qrCodeContainer.getDestPath()), "未指定二维码保存路径");
-        String filePath = QRCodeUtil.generateQRCodeAsPath(qrCodeContainer);
+    public static File generateQRCodeAsFle(QRCodeConfig qrCodeConfig) throws Exception {
+        Preconditions.checkArgument(StringUtils.isNotBlank(qrCodeConfig.getDestPath()), "未指定二维码保存路径");
+        String filePath = QRCodeUtil.generateQRCodeAsPath(qrCodeConfig);
         return new File(filePath);
     }
 
     /**
-     * @param qrCodeContainer
+     * @param qrCodeConfig
      * @return java.lang.String
      * @description 生成二维码(内嵌LOGO)
      * @author lemon
      * @date 2020-04-25 18:09
      */
-    public static String generateQRCodeAsPath(QRCodeContainer qrCodeContainer) throws Exception {
-        Preconditions.checkArgument(StringUtils.isNotBlank(qrCodeContainer.getDestPath()), "未指定二维码保存路径");
-        BufferedImage image = QRCodeUtil.generateQRCode(qrCodeContainer);
-        String filePath = IOUtil.writeFile(image, qrCodeContainer.getFormatName(), qrCodeContainer.getDestPath());
+    public static String generateQRCodeAsPath(QRCodeConfig qrCodeConfig) throws Exception {
+        Preconditions.checkArgument(StringUtils.isNotBlank(qrCodeConfig.getDestPath()), "未指定二维码保存路径");
+        BufferedImage image = QRCodeUtil.generateQRCode(qrCodeConfig);
+        String filePath = IOUtil.writeFile(image, qrCodeConfig.getFormatName(), qrCodeConfig.getDestPath());
         return filePath;
     }
 
     /**
-     * @param qrCodeContainer
+     * @param qrCodeConfig
      * @return byte[]
      * @description
      * @author lemon
      * @date 2020-04-25 18:31
      */
-    public static byte[] generateQRCodeBytes(QRCodeContainer qrCodeContainer) throws Exception {
-        BufferedImage image = QRCodeUtil.generateQRCode(qrCodeContainer);
+    public static byte[] generateQRCodeBytes(QRCodeConfig qrCodeConfig) throws Exception {
+        BufferedImage image = QRCodeUtil.generateQRCode(qrCodeConfig);
         return IOUtil.toByteArray(image);
     }
 
     /**
-     * @param qrCodeContainer
+     * @param qrCodeConfig
      * @return java.awt.image.BufferedImage
      * @description 创建二维码
      * @author lemon
      * @date 2020-04-25 19:59
      */
-    public static BufferedImage generateQRCode(QRCodeContainer qrCodeContainer) throws Exception {
-        BufferedImage bufferedImage = QRCodeUtil.generateQRCodeNative(qrCodeContainer);
+    public static BufferedImage generateQRCode(QRCodeConfig qrCodeConfig) throws Exception {
+        BufferedImage bufferedImage = QRCodeUtil.generateQRCodeNative(qrCodeConfig);
 
         // 插入图片
-        if (qrCodeContainer.getLogo() != null) {
-            ImageLogoUtil.insertLogoImage(bufferedImage, qrCodeContainer.getLogo());
+        if (qrCodeConfig.getLogo() != null) {
+            ImageLogoUtil.insertLogoImage(bufferedImage, qrCodeConfig.getLogo());
         }
 
         // 插入水印
-        if (qrCodeContainer.getWaterMark() != null && StringUtils.isNotBlank(qrCodeContainer.getWaterMark().getContent())) {
-            ImageWaterMarkUtil.insertWaterMark(bufferedImage, qrCodeContainer.getWaterMark());
+        if (qrCodeConfig.getWaterMark() != null && StringUtils.isNotBlank(qrCodeConfig.getWaterMark().getContent())) {
+            ImageWaterMarkUtil.insertWaterMark(bufferedImage, qrCodeConfig.getWaterMark());
         }
 
         return bufferedImage;
     }
 
     /**
-     * @param qrCodeContainer
+     * @param qrCodeConfig
      * @return java.awt.image.BufferedImage
      * @description 创建二维码
      * @author lemon
      * @date 2020-04-25 19:56
      */
-    public static BufferedImage generateQRCodeNative(QRCodeContainer qrCodeContainer) throws Exception {
-        QRCode qrCode = qrCodeContainer.getQrCode();
+    public static BufferedImage generateQRCodeNative(QRCodeConfig qrCodeConfig) throws Exception {
+        QRCode qrCode = qrCodeConfig.getQrCode();
         // 生成二维码
         BitMatrix bitMatrix = new MultiFormatWriter().encode(qrCode.getContent(), qrCode.getBarcodeFormat(),
                 qrCode.getWidth(), qrCode.getHeight(), qrCode.getHints());
         BufferedImage bufferedImage = qrCode.getImageRenderStrategy().render(bitMatrix, qrCode);
-
+        qrCodeConfig.setQrBitMatrix(bitMatrix);
+        qrCodeConfig.setQrBufferedImage(bufferedImage);
         return bufferedImage;
     }
 
@@ -178,5 +177,36 @@ public class QRCodeUtil {
         Result result = new MultiFormatReader().decode(bitmap, hints);
         String resultValue = result.getText();
         return resultValue;
+    }
+
+    /**
+     * @param bitMatrix
+     * @return int
+     * @description 获取二维码位置探测图形宽度
+     * @author lemon
+     * @date 2020-04-28 23:52
+     */
+    public static int getPositionDetectPatternWidth(BitMatrix bitMatrix) {
+        int length = 0;
+        boolean flag = false;
+        int width = bitMatrix.getWidth();
+        int height = bitMatrix.getHeight();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                // 二维码显示点
+                if (bitMatrix.get(x, y) == true) {
+                    flag = true;
+                    length++;
+                } else {
+                    if (flag != false) {
+                        return x;
+                    }
+                }
+            }
+        }
+
+        log.info("二维码位置探测图形宽度%s", length);
+        return length;
     }
 } 

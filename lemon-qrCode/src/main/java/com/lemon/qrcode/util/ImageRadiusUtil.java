@@ -1,6 +1,6 @@
 package com.lemon.qrcode.util;
 
-import com.lemon.qrcode.entity.ImageRadius;
+import com.lemon.qrcode.config.ImageRadius;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
@@ -197,14 +197,14 @@ public class ImageRadiusUtil {
      */
     public static BufferedImage cornerRadius(BufferedImage bufferedImage, ImageRadius imageRadius) {
         if (imageRadius == null) {
-            log.debug("没有指定切圆角信息");
+            log.debug("没有指定圆角信息");
             return bufferedImage;
         }
 
         int width = bufferedImage.getWidth();
         int height = bufferedImage.getHeight();
-        BufferedImage image = new BufferedImage(width, height, imageRadius.getImageType());
-        Graphics2D graphics2D = image.createGraphics();
+        BufferedImage radiusBufferedImage = new BufferedImage(width, height, imageRadius.getImageType());
+        Graphics2D graphics2D = radiusBufferedImage.createGraphics();
         graphics2D.setRenderingHint(imageRadius.getHintKey(), imageRadius.getHintValue());
         graphics2D.setColor(imageRadius.getColor());
         graphics2D.fill(new RoundRectangle2D.Double(0, 0, width, height, imageRadius.getArcw(), imageRadius.getArch()));
@@ -213,6 +213,6 @@ public class ImageRadiusUtil {
         graphics2D.dispose();
         log.info("图片成功切圆角");
 
-        return image;
+        return radiusBufferedImage;
     }
 }
