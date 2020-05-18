@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.lemonframework.cloud</groupId>
+    <groupId>com.lemonframework</groupId>
     <artifactId>lemon-framework</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -274,67 +274,73 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-agent</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-core</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-exception</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-jwt</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-logging</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-mail</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-mock</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
+                <artifactId>lemon-qrCode</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-security</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-test</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-util</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.lemonframework.cloud</groupId>
+                <groupId>com.lemonframework</groupId>
                 <artifactId>lemon-uuid-generator</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>

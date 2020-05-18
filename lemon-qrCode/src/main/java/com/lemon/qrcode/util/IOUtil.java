@@ -84,7 +84,7 @@ public class IOUtil {
      * @param output
      * @return void
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-29 17:08
      */
     public static void write(BufferedImage image, OutputStream output) throws IOException {
@@ -97,7 +97,7 @@ public class IOUtil {
      * @param output
      * @return void
      * @description
-     * @author houjuntao
+     * @author lemon
      * @date 2020-04-29 17:08
      */
     public static void write(BufferedImage image, String formatName, OutputStream output) throws IOException {
