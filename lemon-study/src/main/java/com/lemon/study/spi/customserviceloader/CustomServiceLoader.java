@@ -12,7 +12,9 @@ import java.util.List;
 /**
  * @author lemon
  * @version 1.0
- * @description: TODO
+ * @description:
+ * 1、手动创建 META-INF/services/CustomServiceLoader.PREFIX + service.getName()
+ * 2、使用CustomServiceLoader读取
  * @date Create by lemon on 2019-08-02 17:11
  */
 @Slf4j
@@ -40,6 +42,10 @@ public class CustomServiceLoader {
         }
 
         if (configFileUrls == null) {
+            if (log.isDebugEnabled()) {
+                log.debug("Not find services file {}", fullName);
+            }
+
             return Lists.newArrayList();
         }
 

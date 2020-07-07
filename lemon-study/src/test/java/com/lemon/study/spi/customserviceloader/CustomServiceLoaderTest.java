@@ -1,9 +1,11 @@
 package com.lemon.study.spi.customserviceloader;
 
+import com.lemon.study.spi.serviceloader.service.LemonServiceLoader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import com.lemon.study.spi.serviceloader.service.LemonServiceLoader;
+
+import java.util.List;
 
 public class CustomServiceLoaderTest {
 
@@ -17,6 +19,8 @@ public class CustomServiceLoaderTest {
 
     @Test
     public void load() {
-        CustomServiceLoader.load(LemonServiceLoader.class);
+        List<LemonServiceLoader> lemonServiceLoaders = CustomServiceLoader.load(LemonServiceLoader.class);
+
+        lemonServiceLoaders.forEach((lemonServiceLoader) -> System.out.println("====== " + lemonServiceLoader));
     }
 }

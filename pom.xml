@@ -267,6 +267,7 @@
         <module>lemon-demo</module>
         <module>lemon-unit-test-generator</module>
         <module>lemon-qrCode</module>
+        <module>maven-template</module>
     </modules>
 
     <!--主pom中把依赖通过<dependecyManagement>引起来，表示子pom可能会用到的jar包依赖。

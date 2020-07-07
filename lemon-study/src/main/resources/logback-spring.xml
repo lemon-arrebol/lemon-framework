@@ -48,6 +48,20 @@
         <appender-ref ref="WARN" />
     </logger>
 
+    <springProfile name="local">
+        <logger name="com.lemon" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="WARN"/>
+        </root>
+    </springProfile>
+
     <springProfile name="dev">
         <logger name="com.lemon" level="DEBUG" additivity="false">
             <appender-ref ref="CONSOLE"/>
